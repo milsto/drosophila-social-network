@@ -1,0 +1,7 @@
+numpy
+pandas
+networkx
+matplotlib
+scipy
+python-louvain  # this is imported as the community packaged
+Jinja2
