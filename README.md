@@ -1,4 +1,30 @@
-# My module: Toolkit for trajectory data processing,network construction and analysis
+
+# Instructioncs
+
+This is cleaned up and fixed versions of the code at https://github.com/milanXpetrovic/my_module referenced in paper: 
+
+> Petrović, M., Meštrović, A., Andretić Waldowski, R., & Filošević Vujnović, A. (2023). A network-based analysis detects cocaine-induced changes in social interactions in Drosophila melanogaster. Plos one, 18(3), e0275795. 
+
+To use the code:
+
+1. Install all the dependencies
+    ```
+    pip install -r requirements.txt
+    ```
+2. Change configuration i
+    ```
+    src/config_constants.py
+    ```
+3. You can run a protocol consisting of some predefined pipeline steps in order to reproduce the results (this was tested):
+    ```
+    python src/protocol.py
+    ```
+
+---
+
+# Original Readme
+
+## My module: Toolkit for trajectory data processing,network construction and analysis
 
 [![License](https://img.shields.io/badge/license-BSD--3%20Clause-green)](https://github.com/milanXpetrovic/my_module/blob/main/LICENSE.md)
 
