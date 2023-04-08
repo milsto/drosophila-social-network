@@ -8,6 +8,7 @@ import matplotlib.cm as cm
 from scipy.ndimage.filters import gaussian_filter
 
 import package_functions as hf
+from config_constants import POPULATION_1_PREFIX, POPULATION_2_PREFIX
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -20,7 +21,7 @@ def myplot(x, y, s, bins=500):
     return heatmap.T, extent
 
 
-DATA_PATH = '../2_pipeline/0_0_preproc_data/out'
+DATA_PATH = './2_pipeline/0_0_preproc_data/out'
 # DATA_PATH = r'F:/0_fax/DM_dataset/raw_trackings_pop'
 SAVE_PATH = ''
 
@@ -41,7 +42,7 @@ for pop_name, path in experiments.items():
   for fly_name, path in fly_dict.items():  
     df = pd.read_csv(path, usecols=['pos_x', 'pos_y'])
     
-    if pop_name.startswith('CTRL'):
+    if pop_name.startswith(POPULATION_1_PREFIX):
         x_all_ctrl = pd.concat([x_all_ctrl, df.pos_x], axis=0)
         y_all_ctrl = pd.concat([y_all_ctrl, df.pos_y], axis=0)
       
@@ -73,8 +74,8 @@ plt.colorbar(im)
 fig.set_size_inches(7, 7)
 
 plt.tight_layout()
-plt.title('COC')
-plt.savefig('../3_output/COC_heatmap.png', dpi=350)
+plt.title(f'{POPULATION_2_PREFIX}')
+plt.savefig(f'./3_output/{POPULATION_2_PREFIX}_heatmap.png', dpi=350)
 plt.show()  
 
 
@@ -101,6 +102,6 @@ plt.colorbar(im)
 fig.set_size_inches(7, 7)
 
 plt.tight_layout()
-plt.title('CTRL')
-plt.savefig('../3_output/CTRL_heatmap.png', dpi=350)
+plt.title(f'{POPULATION_1_PREFIX}')
+plt.savefig(f'./3_output/{POPULATION_1_PREFIX}_heatmap.png', dpi=350)
 plt.show()  

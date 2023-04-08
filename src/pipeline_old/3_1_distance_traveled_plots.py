@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 from statistics import mean 
 
 import package_functions as hf
+from config_constants import POPULATION_1_PREFIX, POPULATION_2_PREFIX
 
-DATA_PATH = '../2_pipeline/2_1_get_fly_distance_traveled/out'
-SAVE_PATH = '../3_output/'
+DATA_PATH = './2_pipeline/2_1_get_fly_distance_traveled/out'
+SAVE_PATH = './3_output/'
 
 experiments = hf.load_files_from_folder(DATA_PATH)
 columns = [name.replace('.csv', '') for name in experiments.keys()]
@@ -19,8 +20,8 @@ for pop_name, path in experiments.items():
 total.columns = columns
 df = total
 
-coc_columns = [col for col in df if col.startswith('COC')]
-ctrl_columns = [col for col in df if col.startswith('CTRL')]
+coc_columns = [col for col in df if col.startswith(POPULATION_2_PREFIX)]
+ctrl_columns = [col for col in df if col.startswith(POPULATION_1_PREFIX)]
 df_coc = df[coc_columns].T.values.tolist()
 df_ctrl = df[ctrl_columns].T.values.tolist()
 df_coc = [[x for x in y if not np.isnan(x)] for y in df_coc]
@@ -32,11 +33,11 @@ average_ctrl = mean([mean(e) for e in df_ctrl])
 all_pop = [[x for x in y if not np.isnan(x)] for y in df.T.values.tolist()]
 plt.boxplot(all_pop)
 
-plt.axhline(y=average_ctrl, color='blue', label='Mean CTRL')
-plt.axhline(y=average_coc, color='red', label='Mean COC')
-plt.axvspan(0.5, len(df_coc)+0.5, alpha=0.05, color='red', label='COC popultaions')
+plt.axhline(y=average_ctrl, color='blue', label=f'Mean {POPULATION_1_PREFIX}')
+plt.axhline(y=average_coc, color='red', label=f'Mean {POPULATION_2_PREFIX}')
+plt.axvspan(0.5, len(df_coc)+0.5, alpha=0.05, color='red', label=f'{POPULATION_2_PREFIX} popultaions')
 plt.legend()
-plt.title('COC vs CTRL distances walked distribution')
+plt.title(f'{POPULATION_2_PREFIX} vs {POPULATION_1_PREFIX} distances walked distribution')
 
 plt.savefig(SAVE_PATH + 'distances_walked.png', dpi=350)
 plt.show()

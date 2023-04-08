@@ -2,14 +2,13 @@ import os
 import pandas as pd
 
 import package_functions as hf
+from config_constants import WINDOW_SIZE
 
-WINDOW_SIZE = 3
-
-DATA_PATH = '../2_pipeline/0_0_preproc_data/out'
-SAVE_PATH = '../2_pipeline/0_1_get_path_features/out'
+DATA_PATH = './2_pipeline/0_0_preproc_data/out'
+SAVE_PATH = './2_pipeline/0_1_get_path_features/out'
 
 if not (os.path.exists(SAVE_PATH + '/window_size_' + str(WINDOW_SIZE))):
-    os.mkdir(SAVE_PATH + '/window_size_'+ str(WINDOW_SIZE))
+    os.makedirs(SAVE_PATH + '/window_size_'+ str(WINDOW_SIZE))
 
 experiments = hf.load_multiple_folders(DATA_PATH)
 

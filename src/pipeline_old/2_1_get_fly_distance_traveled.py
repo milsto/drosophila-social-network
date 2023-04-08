@@ -1,8 +1,11 @@
+import os
 import pandas as pd 
 import package_functions as hf
 
-DATA_PATH = '../2_pipeline/0_1_get_path_features/out/window_size_3'
-SAVE_PATH = '../2_pipeline/2_1_get_fly_distance_traveled/out'
+DATA_PATH = './2_pipeline/0_1_get_path_features/out/window_size_3'
+SAVE_PATH = './2_pipeline/2_1_get_fly_distance_traveled/out'
+
+os.makedirs(SAVE_PATH, exist_ok=True)
 
 experiments = hf.load_multiple_folders(DATA_PATH)
 

@@ -12,6 +12,8 @@ import scipy.stats
 from statistics import mean
 import matplotlib.pyplot as plt
 
+from config_constants import POPULATION_1_PREFIX, POPULATION_2_PREFIX
+
 
 import logging 
 logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.DEBUG)
@@ -71,7 +73,7 @@ def load_dfs_to_list(path, min_x, min_y, file_format='.csv'):
     
     df_list = []
     for fly_name, fly_path in files_dict.items():  
-        df = pd.read_csv(fly_path, index_col=0)
+        df = pd.read_csv(fly_path)
         df = prepproc(df, min_x, min_y)
         df = round_coordinates(df, decimal_places=0)
         df = df[['pos_x', 'pos_y']]
@@ -100,7 +102,7 @@ def check_data(path):
     valid_files_count = 0 
     
     for fly_name, path in fly_dict.items(): 
-        df = pd.read_csv(path, index_col=0)
+        df = pd.read_csv(path)
         df_columns = list(df.columns)
     
         if df_columns == columns:
@@ -147,7 +149,7 @@ def find_pop_mins(path):
     pop_min_y = []
     for fly_name, path in fly_dict.items(): 
     
-        df = pd.read_csv(path, index_col=0)
+        df = pd.read_csv(path)
         pop_min_x.append(min(df['pos x']))
         pop_min_y.append(min(df['pos y']))
         
@@ -837,8 +839,8 @@ def stat_test(d):
     stat_test_results = {}
 
     for measure_name, dict_of_values in d.items():
-        ctrl = dict_of_values['CTRL']
-        coc = dict_of_values['COC']
+        ctrl = dict_of_values[POPULATION_1_PREFIX]
+        coc = dict_of_values[POPULATION_2_PREFIX]
         
         t_statistic, p_value = scipy.stats.ttest_ind(ctrl, coc)
     

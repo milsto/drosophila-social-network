@@ -1,17 +1,16 @@
+import os
 import pandas as pd 
 import networkx as nx
 
 import package_functions as hf
+from config_constants import DISTANCE_BETWEEN_FLIES, TOUCH_DURATION_SEC, FPS
 
-DISTANCE_BETWEEN_FLIES = 18 #px distance, arena is 120mm wide, 1000x1000 on x,y axis
-#17px is equal to 2 body distances between flies
-TOUCH_DURATION_SEC = 0.6
-
-FPS = 24 #video fps
 TOUCH_DURATION_FRAMES = int(TOUCH_DURATION_SEC*FPS)
 
-DATA_PATH = '../2_pipeline/0_2_distances_between_flies_matrix/out/'
-SAVE_PATH = '../2_pipeline/1_0_undirected_singleedge_graph/out/'
+DATA_PATH = './2_pipeline/0_2_distances_between_flies_matrix/out/'
+SAVE_PATH = './2_pipeline/1_0_undirected_singleedge_graph/out/'
+
+os.makedirs(SAVE_PATH, exist_ok=True)
 
 experiments = hf.load_files_from_folder(DATA_PATH)
     

@@ -1,15 +1,16 @@
+import os
 import pandas as pd 
 import networkx as nx
 
-import sys
-sys.path.append(r"F:\1_coding_projects\my_module")
+#import module.import_and_preproc as toolkit
+import package_functions as hf
+#import module.networks_tools as netkit
+from config_constants import POPULATION_1_PREFIX, POPULATION_2_PREFIX
 
-import module.import_and_preproc as toolkit
-import module.my_module as hf
-import module.networks_tools as netkit
+DATA_PATH = './2_pipeline/1_0_undirected_singleedge_graph/out/'
+SAVE_PATH = './3_output/'
 
-DATA_PATH = '../2_pipeline/1_0_undirected_singleedge_graph/out/'
-SAVE_PATH = '../3_output/'
+os.makedirs(SAVE_PATH, exist_ok=True)
 
 experiments = hf.load_files_from_folder(DATA_PATH, file_format='.gml')
          
@@ -26,14 +27,14 @@ def do_stuff(total):
         
         for pop_name, values in row.items():
         
-            if pop_name.startswith('COC'):
+            if pop_name.startswith(POPULATION_2_PREFIX):
                 coc_values.append(values)
     
             else:
                 ctrl_values.append(values)
         
-        d.update({'COC': coc_values})
-        d.update({'CTRL': ctrl_values})
+        d.update({POPULATION_2_PREFIX: coc_values})
+        d.update({POPULATION_1_PREFIX: ctrl_values})
         
         res.update({index: d})
     
@@ -55,6 +56,9 @@ for pop_name, path in experiments.items():
     total = pd.concat([total, df], axis=1)
 
 res = do_stuff(total)
+
+total.to_csv(SAVE_PATH+'global_measures_all.csv')
+total.to_latex(SAVE_PATH+'global_measures_all.tex')
 
 total = hf.stat_test(res)
 total = total.round(decimals=3)
