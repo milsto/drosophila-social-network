@@ -8,7 +8,7 @@ import matplotlib.cm as cm
 from scipy.ndimage.filters import gaussian_filter
 
 import package_functions as hf
-from config_constants import POPULATION_1_PREFIX, POPULATION_2_PREFIX
+from config_constants import POPULATION_1_PREFIX, POPULATION_2_PREFIX, SHOW_PLOTS
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -76,7 +76,8 @@ fig.set_size_inches(7, 7)
 plt.tight_layout()
 plt.title(f'{POPULATION_2_PREFIX}')
 plt.savefig(f'./3_output/{POPULATION_2_PREFIX}_heatmap.png', dpi=350)
-plt.show()  
+if SHOW_PLOTS:
+    plt.show()  
 
 
 x = x_all_ctrl
@@ -104,4 +105,5 @@ fig.set_size_inches(7, 7)
 plt.tight_layout()
 plt.title(f'{POPULATION_1_PREFIX}')
 plt.savefig(f'./3_output/{POPULATION_1_PREFIX}_heatmap.png', dpi=350)
-plt.show()  
+if SHOW_PLOTS:
+    plt.show()

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from statistics import mean 
 
 import package_functions as hf
-from config_constants import POPULATION_1_PREFIX, POPULATION_2_PREFIX
+from config_constants import POPULATION_1_PREFIX, POPULATION_2_PREFIX, SHOW_PLOTS
 
 DATA_PATH = './2_pipeline/2_1_get_fly_distance_traveled/out'
 SAVE_PATH = './3_output/'
@@ -40,7 +40,8 @@ plt.legend()
 plt.title(f'{POPULATION_2_PREFIX} vs {POPULATION_1_PREFIX} distances walked distribution')
 
 plt.savefig(SAVE_PATH + 'distances_walked.png', dpi=350)
-plt.show()
+if SHOW_PLOTS:
+    plt.show()
 plt.clf()
 
 
