@@ -8,7 +8,7 @@
 #       - control_g2
 #       - substance_g1
 #       - substance_g2
-DATA_PATH = r"C:\Users\milos\Downloads\data"
+DATA_PATH = r"data\path"
 
 # Population name should be the prefix of the folder name (see example above).
 POPULATION_1_PREFIX = "control"
